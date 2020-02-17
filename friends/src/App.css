@@ -52,3 +52,7 @@ a, .nav-link {
   display: inline-block;
   background: none;
 }
+
+.on-component-link {
+  color: rgb(96, 189, 77);
+}

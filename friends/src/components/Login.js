@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-export default function Login({ isLoggedIn, setIsLoggedIn, history }) {
+export default function Login({ isLoggedIn, setIsLoggedIn, setLoggedInUsername, history }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, showLoader] = useState(false);
@@ -19,6 +19,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, history }) {
         localStorage.setItem("token", res.data.payload);
         history.push("/");
         setIsLoggedIn(true);
+        setLoggedInUsername(username);
       })
       .catch(err => {
         setError('Incorrect username or password!');
@@ -31,7 +32,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, history }) {
   };
 
   return (
-    <div className="App">
+    <div className="login">
       <div className="login-container">
         {isLoggedIn ? (
           <>
