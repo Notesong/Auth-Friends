@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-export default function Login({ isLoggedIn, loggedInUsername }) {
+export default function Login({ loggedInUsername }) {
 
   return (
     <div className="home">
-        {isLoggedIn ? (
+        {localStorage.getItem("token") ? (
             <>
-                <h2>Welcome back, {loggedInUsername}!</h2>
+                <h2>Welcome back, {localStorage.getItem("username")}!</h2>
             </>
         ) : (
             <>
@@ -15,7 +15,6 @@ export default function Login({ isLoggedIn, loggedInUsername }) {
                 <h3>Please <Link to="/login" className="on-component-link">login</Link> to see your Friends.</h3>
             </>
         )}
-        
     </div>
   );
 }

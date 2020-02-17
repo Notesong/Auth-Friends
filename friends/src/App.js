@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState }from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Navagation from "./components/Navagation";
 import Home from "./components/Home";
 import Login from './components/Login';
+import FriendsList from './components/FriendsList';
+import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loggedInUsername, setLoggedInUsername] = useState('');
-
-  const logout = e => {
-    e.preventDefault();
-    setIsLoggedIn(false);
-    setLoggedInUsername('');
-    localStorage.removeItem("token");
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("loggedIn"));
 
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Friends</h1>
-          {isLoggedIn ? <button className="nav-link" onClick={logout}>Logout</button> : <Link to="/login">Login</Link> }
+          <Link className="title" to="/">Friends</Link>
+          <div>
+            <Navagation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          </div>
         </header>
         <Switch>
-          <Route exact path="/" render={(props) => <Home {...props} isLoggedIn={isLoggedIn} loggedInUsername={loggedInUsername} />} />
-          <Route path="/login" render={(props) => <Login {...props} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoggedInUsername={setLoggedInUsername} />} />
+          <Route exact path="/" component={Home} />
+          <Route path="/login" render={(props) => <Login {...props} setIsLoggedIn={setIsLoggedIn} />} />
+          <ProtectedRoute path="/protected" component={FriendsList} />
         </Switch>
       </div>      
     </Router>

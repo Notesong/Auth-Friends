@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import {resetLocalStorage} from "../utils/resetLocalStorage";
 
-export default function Login({ isLoggedIn, setIsLoggedIn, setLoggedInUsername, history }) {
+export default function Login({ setIsLoggedIn, history }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, showLoader] = useState(false);
   const [error, setError] = useState('');
+
+  const formReset = () => {
+    showLoader(false);
+    setUsername('');
+    setPassword('');
+  }
 
   const onSubmit = e => {
     e.preventDefault();
@@ -17,51 +24,47 @@ export default function Login({ isLoggedIn, setIsLoggedIn, setLoggedInUsername, 
       .post("/login", { username: username, password: password })
       .then(res => {
         localStorage.setItem("token", res.data.payload);
-        history.push("/");
+        localStorage.setItem("username", username);
+        localStorage.setItem("loggedIn", true);
         setIsLoggedIn(true);
-        setLoggedInUsername(username);
+        formReset();
+        history.push('/');
       })
       .catch(err => {
         setError('Incorrect username or password!');
-        localStorage.removeItem("token");
-        console.log("invalid login: ", err);
-        showLoader(false);
-        setUsername('');
-        setPassword('');
+        resetLocalStorage();
+        setIsLoggedIn(false);
+        formReset();
       });
   };
 
   return (
     <div className="login">
       <div className="login-container">
-        {isLoggedIn ? (
-          <>
-            <h1>Welcome {username}!</h1>
-            <button onClick={() => setIsLoggedIn(false)}>Log Out</button>
-          </>
-        ) : (
-          <form className="form" onSubmit={onSubmit}>
-            {error && <p className="error">{error}</p>}
-            <p>Login</p>
-            <input
-              type="text"
-              placeholder="username"
-              value={username}
-              onChange={e => setUsername(e.currentTarget.value)}
-            />
-            <input
-              type="password"
-              placeholder="password"
-              autoComplete="new-password"
-              value={password}
-              onChange={e => setPassword(e.currentTarget.value)}
-            />
-            <button className="submit" type="submit" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Log In'}
-            </button>
-          </form>
-        )}
+        <form className="form" onSubmit={onSubmit}>
+          {error && <p className="error">{error}</p>}
+          <p>Login</p>
+          <input
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={e => setUsername(e.currentTarget.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            autoComplete="new-password"
+            value={password}
+            onChange={e => setPassword(e.currentTarget.value)}
+          />
+          <button className="submit" type="submit" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Log In'}
+          </button>
+        </form>
+        <p>Lambda School</p>
+        <p>i&lt;3Lambd4</p>
       </div>
+      
     </div>
   );
 }

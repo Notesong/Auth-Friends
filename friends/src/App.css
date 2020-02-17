@@ -11,6 +11,10 @@
   padding: 0 2rem;
 }
 
+.title {
+  font-size: 3rem;
+}
+
 .login-container {
   width: 400px;
   margin: 0 auto;
@@ -55,4 +59,8 @@ a, .nav-link {
 
 .on-component-link {
   color: rgb(96, 189, 77);
+}
+
+.list-link {
+  margin-left: 1.5rem;
 }
