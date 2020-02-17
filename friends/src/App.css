@@ -62,6 +62,10 @@ a, .nav-link {
   background: none;
 }
 
+.friend-email {
+  color: rgb(76, 153, 60);
+}
+
 .on-component-link {
   color: rgb(96, 189, 77);
 }
@@ -92,6 +96,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .x-button { 
@@ -99,8 +104,4 @@ button {
   color: black;
   text-align: right;
   padding: 0;
-}
-
-.x-button:hover {
-  cursor: pointer;
 }

@@ -5,7 +5,7 @@ export default function Friend({ name, age, email }) {
         <div className="friend">
             <h3>{name}</h3>
             <p>Age: {age}</p>
-            <p>Email: {email}</p>
+            <p>Email: <a className="friend-email" href={`mailto:${email}`}>{email}</a></p>
         </div>
     )
 }

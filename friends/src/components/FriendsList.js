@@ -78,18 +78,21 @@ export default function FriendsList() {
                 type="text"
                 placeholder="friend's name"
                 value={name}
+                required
                 onChange={e => setName(e.currentTarget.value)}
               />
               <input
                 type="text"
                 placeholder="friend's age"
                 value={age}
+                required
                 onChange={e => setAge(e.currentTarget.value)}
               />
               <input
                 type="email"
                 placeholder="friend's email"
                 value={email}
+                required
                 onChange={e => setEmail(e.currentTarget.value)}
               />
               <button className="submit" type="submit" disabled={isLoadingForm}>
