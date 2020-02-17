@@ -28,7 +28,7 @@ export default function Login({ setIsLoggedIn, history }) {
         localStorage.setItem("loggedIn", true);
         setIsLoggedIn(true);
         formReset();
-        history.push('/');
+        history.push('/protected');
       })
       .catch(err => {
         setError('Incorrect username or password!');

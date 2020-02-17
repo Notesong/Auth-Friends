@@ -15,7 +15,7 @@
   font-size: 3rem;
 }
 
-.login-container {
+.login-container, .friends-form-container {
   width: 400px;
   margin: 0 auto;
   margin-top: 3rem;
