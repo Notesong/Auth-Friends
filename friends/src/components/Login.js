@@ -1,28 +1,33 @@
 import React, { useState } from 'react';
-import { login } from '../utils/utils';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-export default function Login() {
+export default function Login({ isLoggedIn, setIsLoggedIn, history }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, showLoader] = useState(false);
   const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
-
+    
     setError('');
     showLoader(true);
 
-    try {
-      await login({ username, password });
-      setIsLoggedIn(true);
-    } catch (error) {
-      setError('Incorrect username or password!');
-      showLoader(false);
-      setUsername('');
-      setPassword('');
-    }
+    axiosWithAuth()
+      .post("/login", { username: username, password: password })
+      .then(res => {
+        localStorage.setItem("token", res.data.payload);
+        history.push("/");
+        setIsLoggedIn(true);
+      })
+      .catch(err => {
+        setError('Incorrect username or password!');
+        localStorage.removeItem("token");
+        console.log("invalid login: ", err);
+        showLoader(false);
+        setUsername('');
+        setPassword('');
+      });
   };
 
   return (
@@ -36,7 +41,7 @@ export default function Login() {
         ) : (
           <form className="form" onSubmit={onSubmit}>
             {error && <p className="error">{error}</p>}
-            <p>Please Login!</p>
+            <p>Login</p>
             <input
               type="text"
               placeholder="username"
