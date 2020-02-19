@@ -1,0 +1,107 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 0 2rem;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.login-container, .friends-form-container {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.form {
+  display: flex;
+  border: 1px solid #ddd;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.friend-form {
+  border: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+input {
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.submit {
+  padding: 10px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+a, .nav-link {
+  text-decoration: none;
+  color: #d3d3d3;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: inline-block;
+  background: none;
+}
+
+.friend-email {
+  color: rgb(76, 153, 60);
+}
+
+.on-component-link {
+  color: rgb(96, 189, 77);
+}
+
+.list-link {
+  margin-left: 1.5rem;
+}
+
+.friends-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.friend {
+  background-color: rgb(223, 223, 223);
+  margin: 3rem;
+  padding: 1rem;
+  width: 300px;
+}
+
+button {
+  background-color: rgb(96, 189, 77);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.x-button { 
+  background-color: transparent;
+  color: black;
+  text-align: right;
+  padding: 0;
+}
